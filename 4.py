@@ -2,7 +2,7 @@ import os
 import shutil
 import re
 
-# Транслітерація кириличних символів на латиницю
+#Транслітерація кириличних символів на латиницю
 def normalize(text, translit_dict):
     normalized_text = ""
     for char in text:
@@ -14,14 +14,14 @@ def normalize(text, translit_dict):
             normalized_text += "_"
 
 
-    invalid_chars = r'[^\w.]' # Заміна неприпустимих символів на символ '_'
+    invalid_chars = r'[^\w.]' #Заміна неприпустимих символів на символ '_'
     normalized_text = re.sub(invalid_chars, '_', normalized_text)
 
     return normalized_text
 
 
 def process_folder(folder):
-    image_extensions = ('JPEG', 'PNG', 'JPG', 'SVG')
+    image_extensions = ('JPEG', 'PNG', 'HEIC', 'JPG', 'SVG')
     video_extensions = ('AVI', 'MP4', 'MOV', 'MKV')
     document_extensions = ('DOC', 'DOCX', 'PAGES', 'TXT', 'PDF', 'XLSX', 'PPTX')
     audio_extensions = ('MP3', 'OGG', 'WAV', 'AMR')
