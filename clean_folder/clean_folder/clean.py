@@ -141,10 +141,9 @@ def main():
     target_folder = sys.argv[1]
     known_extensions, unknown_extensions = process_folder(target_folder)
 
-    print("Known Extensions:")
-    print(known_extensions)
-    print("Unknown Extensions:")
-    print(unknown_extensions)
+    print("Known Extensions:", known_extensions)
+    print("Unknown Extensions:", unknown_extensions)
+
 
 if __name__ == "__main__":
     main()
