@@ -3,3 +3,6 @@
 *.pyd
 /build/
 /__pycache__
+/dist/
+*.DS_Store
+main.css
