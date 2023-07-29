@@ -109,27 +109,6 @@ def process_folder(folder):
     return known_extensions, unknown_extensions
 
 
-"""if __name__ == "__main__":
-    import sys
-
-    if len(sys.argv) != 2:
-        print("Usage: python3 4.py <Потрібно вказати шлях до папки.>")
-        sys.exit(1)
-
-    target_folder = sys.argv[1]
-    known_extensions, unknown_extensions = process_folder(target_folder)
-
-    print("Known Extensions:")
-    print(known_extensions)
-    print("Unknown Extensions:")
-    print(unknown_extensions)
-
-def main():
-    # Код, що викликається, коли запускаєте скрипт з консолі.
-
-    if __name__ == "__main__":
-        main() """ 
-
 def main():
     import sys
     # Код, що викликається, коли запускаєте скрипт з консолі.
