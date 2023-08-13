@@ -1,6 +1,8 @@
 from collections import UserDict
 
 
+contacts = {}
+
 class Field:
     def __init__(self, value):
         self.value = value
@@ -12,10 +14,10 @@ class Phone(Field):
     pass
 
 class Record:
-    def __init__(self, name: str, phones: list, email: list):
+    def __init__(self, name: str, phones: list):
         self.name = name
         self.phones = [Phone(phone) for phone in phones]
-        self.emails = email
+        
 
     def add_phone(self, phone):
         phone_number = Phone(phone)
@@ -38,3 +40,16 @@ class AddressBook(UserDict):
 
     def find_record(self, value):
         return self.data.get(value)
+    
+"""if __name__ == "__main__":
+    name = Name('Bill')
+    phone = Phone('1234567890')
+    rec = Record(name, phone)
+    ab = AddressBook()
+    ab.add_record(rec)
+    assert isinstance(ab['Bill'], Record)
+    assert isinstance(ab['Bill'].name, Name)
+    assert isinstance(ab['Bill'].phones, list)
+    assert isinstance(ab['Bill'].phones[0], Phone)
+    assert ab['Bill'].phones[0].value == '1234567890'
+    print('All Ok)')"""

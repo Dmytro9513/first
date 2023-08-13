@@ -96,7 +96,7 @@ def main():
     while True:
         command = input("> ").lower()
 
-        if command == "good bye" or command == "close" or command == "exit":
+        if command == "bye" or command == "close" or command == "exit":
             print("Good bye!")
             break
         elif command == "hello" or command == "hi" or command == "hallo":
@@ -110,7 +110,7 @@ def main():
         elif command.startswith("phone"):
             response = show_phone(command)
             print(response)
-        elif command == "show all":
+        elif command == "show all" or command == "show list":
             response = show_all_contacts()
             print(response)
         else:
