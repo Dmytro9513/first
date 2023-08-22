@@ -180,4 +180,4 @@ if __name__ == "__main__":
             else:
                 print("Контакт не знайдений.")
         else:
-            print("Invalid command.")
+            print("Невірна команда.")
