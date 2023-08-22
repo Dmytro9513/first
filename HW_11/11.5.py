@@ -50,7 +50,7 @@ class Record:
 
     def edit_birthday(self, new_birthday):
         try:
-            datetime.strptime(new_birthday, "%Y-%m-%d")  # Перевіряємо коректність формату дати
+            datetime.strptime(new_birthday, "%Y-%m-%d")
             self.birthday = Birthday(new_birthday)
         except ValueError:
             print("Invalid birthday format. Use YYYY-MM-DD")
@@ -93,18 +93,18 @@ if __name__ == "__main__":
         command = input(">").lower()
 
         if command in ["bye", "good bye", "exit"]:
-            print("Goodbye!")
+            print("До побачення,повертайтесь!")
             break
         elif command in ["hi", "hello"]:
-            print("Welcome!")
+            print("Вітаю,друже!")
         elif command == "add":
             name = input("Enter name: ").lower()
             phone = input("Enter phone number: ")
             while not phone.isdigit() or len(phone) != 10:
-                print("Invalid phone number format. Please enter 10 digits only.")
+                print("Цей номер не є дійсний.Ведіть 10 цифр.")
                 phone = input("Enter phone number: ")
             if name.lower() in book.data:
-                print("Contact with this name already exists!")
+                print("Контакт з цим імʼям вже створений!")
             else:
                 record = Record(name, phone)
                 book.add_record(record)
@@ -119,9 +119,9 @@ if __name__ == "__main__":
                     record.birthday = Birthday(birthday_input)
                     print("Birthday added.")
                 except ValueError:
-                    print("Invalid birthday format. Use YYYY-MM-DD")
+                    print("Невірний формат дати народження. Введи YYYY-MM-DD")
             else:
-                print("Contact not found.")
+                print("Контакт з таким іменем ще не доданий.")
         elif command.startswith("edit_phone"):
             try:
                 name = input("Enter name: ")
@@ -136,7 +136,7 @@ if __name__ == "__main__":
                             print("Phone edited.")
                             break
                     else:
-                        print("Phone not found.")
+                        print("Телефон не знайдений.")
                 else:
                     print(f"Contact '{name}' not found.")
             except Exception as e:
@@ -148,7 +148,7 @@ if __name__ == "__main__":
                 new_birthday = input("Enter new birthday (YYYY-MM-DD): ")
                 record.edit_birthday(new_birthday)
             else:
-                print("Contact not found.")
+                print("Контакт не знайдений.")
         elif command == "show all":
             for record in book.data.values():
                 print(f"Name: {record.name.value}, Phone: {record.show_phones()}")
@@ -166,7 +166,7 @@ if __name__ == "__main__":
                         print(f"Days to birthday: {result.days_to_birthday()} days")
                     print("-" * 20)
             else:
-                print("No contacts found.")
+                print("Контакт не знайдений.")
         elif command == "search phone":
             phone_query = input("Enter phone to search: ")
             search_results = book.search_by_phone(phone_query)
@@ -178,6 +178,6 @@ if __name__ == "__main__":
                         print(f"Days to birthday: {result.days_to_birthday()} days")
                     print("-" * 20)
             else:
-                print("No contacts found.")
+                print("Контакт не знайдений.")
         else:
             print("Invalid command.")
