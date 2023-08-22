@@ -55,13 +55,6 @@ class Phone(Field):
     pass
 
 
-"""class Record:
-    def __init__(self, name: str, phones: list):
-        self.name = name
-        self.phones = [Phone(phone) for phone in phones]"""
-# self.email = email
-
-
 class Record:
     def __init__(
         self, name: str, phone: Phone = None
