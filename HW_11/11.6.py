@@ -14,20 +14,23 @@ class Field:
 
 class Phone(Field):
     def __set__(self, instance, value):
-        self.value = value
+        if len(value) == 10 and value.isdigit():
+            self.value = value
+        else:
+            raise ValueError("Невірний номер")
 
 class Birthday(Field):
     def __set__(self, instance, value):
         try:
             datetime.strptime(value, "%Y-%m-%d")
         except ValueError:
-            raise ValueError("Invalid birthday format. Use YYYY-MM-DD")
+            raise ValueError("Невірний формат дати народження. Введи YYYY-MM-DD")
         self.value = value
 
 class Name(Field):
     def __set__(self,instance, value):
         if not value:
-            raise ValueError("Name cannot be empty")
+            raise ValueError("Поле з імʼям не може бути пустим")
         self.value = value
 
 class Record:
@@ -53,7 +56,7 @@ class Record:
             datetime.strptime(new_birthday, "%Y-%m-%d")
             self.birthday = Birthday(new_birthday)
         except ValueError:
-            print("Invalid birthday format. Use YYYY-MM-DD")
+            print("Невірний формат дати народження. Введи YYYY-MM-DD")
 
     def show_phones(self):
         return [phone.value for phone in self.phones]
@@ -71,6 +74,17 @@ class Record:
 class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
+
+    def __iter__(self):
+        self._iter_index = 0
+        return self
+
+    def __next__(self):
+        if self._iter_index >= len(self.data):
+            raise StopIteration
+        record = list(self.data.values())[self._iter_index]
+        self._iter_index += 1
+        return record
 
     def search_by_name(self, name):
         results = []
@@ -188,4 +202,15 @@ if __name__ == "__main__":
             else:
                 print(f"Контакт '{name}' не знайдений.")
         else:
-            print("Invalid command.")
+            print("Невірна команда.")
+
+    if __name__ == "__main__":
+        book = AddressBook()
+
+        record1 = Record("Dmytro", "1234567890")
+        record2 = Record("Mila", "9876543210")
+        book.add_record(record1)
+        book.add_record(record2)
+
+        for contact in book:
+            print(f"Ім'я: {contact.name.value}, Телефон: {contact.show_phones()}")
