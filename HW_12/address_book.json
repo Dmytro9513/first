@@ -1,8 +1,12 @@
 {
     "contacts": [
         {
-            "name": "asd",
-            "phones": [
-                "1234123412"
-            ],
-            "birthday": 
+            "name": "John Doe",
+            "phone": "1234567890"
+        },
+        {
+            "name": "Jane Smith",
+            "phone": "0987654321"
+        }
+    ]
+}
