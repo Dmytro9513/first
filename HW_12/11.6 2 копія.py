@@ -17,8 +17,8 @@ class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, datetime):
             return obj.strftime('%Y-%m-%d')
-        elif isinstance(obj, Name):  # Name is the class of your object
-            return obj.value  # Replace with the method to convert Name object to a serializable format
+        elif isinstance(obj, Name):
+            return obj.value 
         return super().default(obj)
 
 
@@ -152,19 +152,7 @@ class Record:
             return days_left
         else:
             return None
-    """def days_to_birthday(self):
-        if self.birthday and isinstance(self.birthday, Birthday):
-            today = datetime.today()
-            birthday_date = datetime.strptime(self.birthday.value, "%Y-%m-%d")
-            
-            next_birthday = datetime(today.year, birthday_date.month, birthday_date.day)
-
-            if today > next_birthday:
-                next_birthday = next_birthday.replace(year=today.year + 1)
-            days_left = (next_birthday - today).days
-            return days_left
-        return None"""
-
+ 
 class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
@@ -288,18 +276,7 @@ if __name__ == "__main__":
                     print("Невірний формат дати. Використовуйте YYYY-MM-DD.")
             else:
                 print("Контакт з таким іменем ще не доданий.")
-            """name = input("Введи імʼя: ")
-            if name.lower() in book.data:
-                birthday_input = input("Введи дату народження (YYYY-MM-DD): ")
-                try:
-                    datetime.strptime(birthday_input, "%Y-%m-%d")
-                    record = book.data[name.lower()]
-                    record.birthday = Birthday(birthday_input)
-                    print("Дата народження додана.")
-                except ValueError:
-                    print("Невірний формат дати народження. Введи YYYY-MM-DD")
-            else:
-                print("Контакт з таким іменем ще не доданий.")"""
+
         elif command.startswith("edit_phone"):
             try:
                 name = input("Введи імʼя: ")
@@ -356,6 +333,7 @@ if __name__ == "__main__":
                     print("-" * 20)
             else:
                 print("Контакт не знайдений.")
+                
         elif command == "search phone":
             phone_query = input("Введи частину номера для пошуку: ")
             search_results = book.search_by_phone(phone_query)
