@@ -210,7 +210,7 @@ def save_address_book(address_book, filename):
 
 def load_address_book(filename):
     if not os.path.exists(filename):
-        print(f"Файл '{filename}' не існує. Створюю нову адресну книгу.")
+        print(f"Файл '{filename}' не існує.")
         return AddressBook()
 
     try:
@@ -250,8 +250,10 @@ if __name__ == "__main__":
             save_address_book(book, filename)
             print("До побачення,повертайся!")
             break
+
         elif command in ["hi", "hello", "привіт"]:
             print("Вітаю,друже!")
+
         elif command in ["add", "додати"]:
             name = input("Введи Імʼя: ").lower()
             phone = input("Введи номер телефону(10цифр): ")
@@ -264,13 +266,14 @@ if __name__ == "__main__":
                 record = Record(name, phone)
                 book.add_record(record)
                 print("Контакт доданий.")
+
         elif command == "add_birthday":
             name = input("Введи імʼя: ")
             if name.lower() in book.data:
                 birthday = input("Введи дату народження (YYYY-MM-DD): ")
                 try:
                     datetime.strptime(birthday, "%Y-%m-%d")
-                    book.data[name].birthday = Birthday(birthday)  # Оновити існуючий об'єкт Birthday
+                    book.data[name].birthday = Birthday(birthday)
                     print("Дата народження додана.")
                 except ValueError:
                     print("Невірний формат дати. Використовуйте YYYY-MM-DD.")
@@ -296,24 +299,16 @@ if __name__ == "__main__":
                     print(f"Контакт '{name}' не знайдено.")
             except Exception as e:
                 print(f"Error: {e}")
-        elif command == "edit_birthday":
-            name = input("Введи імʼя: ")
-            if name.lower() in book.data:
-                record = book.data[name.lower()]
-                new_birthday = input("Введи нову дату народження (YYYY-MM-DD): ")
-                record.edit_birthday(new_birthday)
-            else:
-                print("Контакт не знайдений.")
+
         elif command == "show all":
             for record in book.data.values():
                 print(f"Імʼя: {record.name.value}, Телефон: {record.show_phones()}")
-                
                 if record.birthday is not None:
                     days_left = record.days_to_birthday()
                     if days_left is not None:
                         days_str = f"{days_left} днів"
-                    else:
-                        days_str = "Сьогодні!"
+                    """else:
+                        days_str = "Сьогодні!"""
                     print(f"Днів до дня народження: {days_str}")
                 else:
                     print("Днів до дня народження: Немає дати")
@@ -356,5 +351,4 @@ if __name__ == "__main__":
                 print(f"Контакт '{name}' не знайдений.")
         else:
             print("Невірна команда.")
-
         save_address_book(book, filename)
